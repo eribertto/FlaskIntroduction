@@ -21,7 +21,7 @@ def index():
         task_content = request.form['content']
         new_task = Todo(content=task_content)
 
-        try:
+        try:	# push to database
             db.session.add(new_task)
             db.session.commit()
             return redirect('/')
@@ -29,7 +29,7 @@ def index():
             return 'There was an issue adding your task'
 
     else:
-        tasks = Todo.query.order_by(Todo.date_created).all()
+        tasks = Todo.query.order_by(Todo.date_created).all()	# feature: add hh:mm format
         return render_template('index.html', tasks=tasks)
 
 
